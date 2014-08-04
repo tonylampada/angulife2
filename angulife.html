@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+		<script>
+
+function MyCtrl($scope){
+	$scope.linhas = [];
+	for(var i=0; i<30; i++){
+		var linha = [];
+		for(var j = 0; j<30; j++){
+			linha.push(false);
+		}
+		$scope.linhas.push(linha);
+	}
+
+	$scope.toggle = function(i, j){
+		$scope.linhas[i][j] = !$scope.linhas[i][j];
+	};
+}
+
+		</script>
+
+		<style>
+
+		td {
+			border-style: solid;
+			border-width: 1px;
+			width: 15px;
+			height: 15px;
+		}
+
+		.vivo {
+			background-color: black;
+		}
+
+		</style>
+	</head>
+	<body ng-app ng-controller="MyCtrl">
+		<table>
+			<tr ng-repeat="linha in linhas">
+				<td ng-repeat="celula in linha track by $index"
+					ng-class="{vivo: celula}"
+					ng-click="toggle($parent.$index,$index)"></td>
+				<!-- Valeu Pete!!!!
+				http://stackoverflow.com/questions/19228982/table-from-2d-array-in-angularjs -->
+			</tr>
+		</table>
+	</body>
+</html>
